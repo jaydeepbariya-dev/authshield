@@ -1,0 +1,722 @@
+{
+  "info": {
+    "_postman_id": "58eb43a6-5bfb-4762-83c1-e52b991dc89e",
+    "name": "AuthShield",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "33178832"
+  },
+  "item": [
+    {
+      "name": "auth",
+      "item": [
+        {
+          "name": "register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"Normal User\",\r\n    \"email\": \"user@authshield.com\",\r\n    \"password\": \"password\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/v1/auth/signup",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "signup"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.environment.set(\"accessToken\", pm.response.json().accessToken)\r",
+                  "pm.environment.set(\"refreshToken\", pm.response.json().refreshToken)"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"admin@authshield.com\",\r\n    \"password\": \"password\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/v1/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "refresh",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlZWJjZWE5ZC05ZjEwLTQxMGUtYTRhYy1mZjJhNzZlYzk3ZDYiLCJpYXQiOjE3NzcwMzg2MjAsImV4cCI6MTc3NzEyNTAyMH0.D7jZVP3DiDRu-0sem5pHjzk_IQG2r491DlFj5bqpQy8\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/v1/auth/refresh",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "refresh"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "logout",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlZWJjZWE5ZC05ZjEwLTQxMGUtYTRhYy1mZjJhNzZlYzk3ZDYiLCJpYXQiOjE3NzcwMzg4NTQsImV4cCI6MTc3NzEyNTI1NH0.vsvwXmnK5yTxMAsGcWGoqIiS-BXyZsJCQkP2IC1M4Ww",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/v1/auth/logout",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "logout"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "me",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJ1c2VySWQiOiJlZWJjZWE5ZC05ZjEwLTQxMGUtYTRhYy1mZjJhNzZlYzk3ZDYiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNzc3MDQwNTc3LCJleHAiOjE3NzcwNDQxNzd9.wgjmgardEqeYYvihTwL5fP_0SPJy3LU5YQVoman6FKg",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/v1/auth/me",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "me"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "forgot-password",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJ1c2VySWQiOiJlZWJjZWE5ZC05ZjEwLTQxMGUtYTRhYy1mZjJhNzZlYzk3ZDYiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNzc3MDQwNTc3LCJleHAiOjE3NzcwNDQxNzd9.wgjmgardEqeYYvihTwL5fP_0SPJy3LU5YQVoman6FKg",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\":\"user3@gmail.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/v1/auth/forgot-password",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "forgot-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "reset-password",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJ1c2VySWQiOiJlZWJjZWE5ZC05ZjEwLTQxMGUtYTRhYy1mZjJhNzZlYzk3ZDYiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNzc3MDQwNTc3LCJleHAiOjE3NzcwNDQxNzd9.wgjmgardEqeYYvihTwL5fP_0SPJy3LU5YQVoman6FKg",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"token\":\" eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJ0eXBlIjoiUEFTU1dPUkRfUkVTRVQiLCJpYXQiOjE3NzcwNDM4MzgsImV4cCI6MTc3NzA0NDczOH0.9fN8nLqhYd0Nbpo50yisBgBYMBafR4Vj-oIXW2X1PdM\",\r\n    \"newPassword\": \"user3new\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/v1/auth/reset-password",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "reset-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "change-password",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJ1c2VySWQiOiJlZWJjZWE5ZC05ZjEwLTQxMGUtYTRhYy1mZjJhNzZlYzk3ZDYiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNzc3MDQwNTc3LCJleHAiOjE3NzcwNDQxNzd9.wgjmgardEqeYYvihTwL5fP_0SPJy3LU5YQVoman6FKg",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"oldPassword\":\"user3new\",\r\n    \"newPassword\":\"user3changed\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/v1/auth/change-password",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "change-password"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "roles",
+      "item": [
+        {
+          "name": "all",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJ1c2VySWQiOiJlZWJjZWE5ZC05ZjEwLTQxMGUtYTRhYy1mZjJhNzZlYzk3ZDYiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNzc3MDQ0NzMzLCJleHAiOjE3NzcwNDgzMzN9.DZnf1Fu96tJjm5nIVYb-kJgjHBVZ8fCgizNJQ90mmv8",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"user3@gmail.com\",\r\n    \"password\": \"user3\"\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/v1/roles",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "roles"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "create",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJ1c2VySWQiOiJlZWJjZWE5ZC05ZjEwLTQxMGUtYTRhYy1mZjJhNzZlYzk3ZDYiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNzc3MDQ0NzMzLCJleHAiOjE3NzcwNDgzMzN9.DZnf1Fu96tJjm5nIVYb-kJgjHBVZ8fCgizNJQ90mmv8",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"ROLE_USER\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/v1/roles",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "roles"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJ1c2VySWQiOiJlZWJjZWE5ZC05ZjEwLTQxMGUtYTRhYy1mZjJhNzZlYzk3ZDYiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNzc3MDQ0NzMzLCJleHAiOjE3NzcwNDgzMzN9.DZnf1Fu96tJjm5nIVYb-kJgjHBVZ8fCgizNJQ90mmv8",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"ROLE_ADMINISTRATOR\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/v1/roles/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "roles",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJ1c2VySWQiOiJlZWJjZWE5ZC05ZjEwLTQxMGUtYTRhYy1mZjJhNzZlYzk3ZDYiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNzc3MDQ0NzMzLCJleHAiOjE3NzcwNDgzMzN9.DZnf1Fu96tJjm5nIVYb-kJgjHBVZ8fCgizNJQ90mmv8",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"ROLE_ADMINISTRATOR\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/v1/roles/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "roles",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "assign",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJ1c2VySWQiOiJlZWJjZWE5ZC05ZjEwLTQxMGUtYTRhYy1mZjJhNzZlYzk3ZDYiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNzc3MDQ0NzMzLCJleHAiOjE3NzcwNDgzMzN9.DZnf1Fu96tJjm5nIVYb-kJgjHBVZ8fCgizNJQ90mmv8",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"userId\":\"eebcea9d-9f10-410e-a4ac-ff2a76ec97d6\",\r\n    \"roleName\":\"ROLE_MANAGER\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/v1/roles/assign",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "roles",
+                "assign"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "users",
+      "item": [
+        {
+          "name": "all",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJ1c2VySWQiOiJlZWJjZWE5ZC05ZjEwLTQxMGUtYTRhYy1mZjJhNzZlYzk3ZDYiLCJyb2xlcyI6WyJST0xFX1VTRVIiLCJST0xFX01BTkFHRVIiXSwiaWF0IjoxNzc3MDQ1NTYwLCJleHAiOjE3NzcwNDkxNjB9.5zRzUcjcFTPN1Ko869aLN2rLikbBk5NObbZOYRBuAyw",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"user3@gmail.com\",\r\n    \"password\": \"user3changed\"\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/v1/users",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "id",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJ1c2VySWQiOiJlZWJjZWE5ZC05ZjEwLTQxMGUtYTRhYy1mZjJhNzZlYzk3ZDYiLCJyb2xlcyI6WyJST0xFX1VTRVIiLCJST0xFX01BTkFHRVIiXSwiaWF0IjoxNzc3MDQ1NTYwLCJleHAiOjE3NzcwNDkxNjB9.5zRzUcjcFTPN1Ko869aLN2rLikbBk5NObbZOYRBuAyw",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"user3@gmail.com\",\r\n    \"password\": \"user3changed\"\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/v1/users/ac4ea86a-75b3-4b2c-9fcf-044ae6a27c72",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "ac4ea86a-75b3-4b2c-9fcf-044ae6a27c72"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJ1c2VySWQiOiJlZWJjZWE5ZC05ZjEwLTQxMGUtYTRhYy1mZjJhNzZlYzk3ZDYiLCJyb2xlcyI6WyJST0xFX1VTRVIiLCJST0xFX01BTkFHRVIiXSwiaWF0IjoxNzc3MDQ1NTYwLCJleHAiOjE3NzcwNDkxNjB9.5zRzUcjcFTPN1Ko869aLN2rLikbBk5NObbZOYRBuAyw",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"user1updated\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/v1/users/ac4ea86a-75b3-4b2c-9fcf-044ae6a27c72",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "ac4ea86a-75b3-4b2c-9fcf-044ae6a27c72"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJ1c2VySWQiOiJlZWJjZWE5ZC05ZjEwLTQxMGUtYTRhYy1mZjJhNzZlYzk3ZDYiLCJyb2xlcyI6WyJST0xFX1VTRVIiLCJST0xFX01BTkFHRVIiXSwiaWF0IjoxNzc3MDQ2MjAxLCJleHAiOjE3NzcwNDk4MDF9.ganNRXv9OaOZ6vNN9nF3z1GHXicp_b4_I3Gr6e0uBwk",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"user1updated\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/v1/users/33344be3-2672-4468-9da2-7038e78bfaaf",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "33344be3-2672-4468-9da2-7038e78bfaaf"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

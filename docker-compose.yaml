@@ -1,0 +1,66 @@
+services:
+  app:
+    build: .
+    container_name: authshield-app
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/authshield
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
+
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+
+      # ✅ Run data.sql
+      SPRING_SQL_INIT_MODE: always
+
+      # ✅ Ensure tables created before data.sql
+      SPRING_JPA_DEFER_DATASOURCE_INITIALIZATION: true
+
+    networks:
+      - authshield-network
+
+  postgres:
+    image: postgres:16
+    container_name: authshield-db
+    restart: always
+    environment:
+      POSTGRES_DB: authshield
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      # 👇 optional (future use for init scripts)
+      - ./docker/postgres:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d authshield"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - authshield-network
+
+  redis:
+    image: redis:7
+    container_name: authshield-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - authshield-network
+
+volumes:
+  postgres_data:
+
+networks:
+  authshield-network:
+    driver: bridge
