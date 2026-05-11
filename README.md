@@ -118,7 +118,6 @@ mvn test
 I verified each endpoint locally with Postman.
 
 To add Postman coverage to the repository, export your collection and save it under `postman/AuthShield.postman_collection.json`.
-You can also include an environment file under `postman/AuthShield.postman_environment.json` for local variables like `{{baseUrl}}` and `{{authToken}}`.
 
 ## Project Structure
 
